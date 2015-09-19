@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "name": "Libft",
+    "slug": "libft",
+    "parent": null,
+    "children": [],
+    "solo": true,
+    "begin_at": null,
+    "end_at": null,
+    "min_estimate_time": 604800,
+    "max_estimate_time": 1209600,
+    "max_people": null,
+    "url": "https://api.intrav2.42.fr/v2/projects/libft",
+    "project_users_url": "https://api.intrav2.42.fr/v2/projects/libft/projects_users",
+    "teams_url": "https://api.intrav2.42.fr/v2/projects/libft/teams",
+    "scales": [
+      {
+        "id": 1,
+        "correction_number": 5,
+        "is_primary": true
+      }
+    ],
+    "uploads": [],
+    "tier": 1,
+    "cursus": [
+      {
+        "id": 1,
+        "created_at": "2014-11-02T17:43:38.480+01:00",
+        "name": "42",
+        "slug": "42",
+        "users_count": 1918,
+        "users_url": "https://api.intrav2.42.fr/v2/cursus/42/users",
+        "projects_url": "https://api.intrav2.42.fr/v2/cursus/42/projects",
+        "topics_url": "https://api.intrav2.42.fr/v2/cursus/42/topics",
+        "tags_url": "https://api.intrav2.42.fr/v2/cursus/42/tags"
+      }
+    ],
+    "attachments": [
+      {
+        "id": 1,
+        "kind": "pdf",
+        "url": "https://cdn.intrav2.42.fr/pdf/pdf/2/libft.pdf",
+        "label": "Subject",
+        "content": null
+      },
+      {
+        "id": 1314,
+        "kind": "pdf",
+        "url": "https://cdn.intrav2.42.fr/pdf/pdf/435/libft.ro.pdf",
+        "label": "Subiect",
+        "content": null
+      }
+    ],
+    "skills": [
+      {
+        "id": 2,
+        "name": "Imperative programming"
+      },
+      {
+        "id": 3,
+        "name": "Rigor"
+      },
+      {
+        "id": 1,
+        "name": "Algorithms & AI"
+      }
+    ],
+    "tags": [
+      {
+        "id": 6,
+        "name": "Libft"
+      },
+      {
+        "id": 2,
+        "name": "C"
+      }
+    ],
+    "evaluations": [
+      {
+        "id": 15,
+        "kind": "scale"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Get_Next_Line",
+    "slug": "get_next_line",
+    "parent": null,
+    "children": [],
+    "solo": true,
+    "begin_at": null,
+    "end_at": null,
+    "min_estimate_time": 604800,
+    "max_estimate_time": 1209600,
+    "max_people": null,
+    "url": "https://api.intrav2.42.fr/v2/projects/get_next_line",
+    "project_users_url": "https://api.intrav2.42.fr/v2/projects/get_next_line/projects_users",
+    "teams_url": "https://api.intrav2.42.fr/v2/projects/get_next_line/teams",
+    "scales": [
+      {
+        "id": 2,
+        "correction_number": 3,
+        "is_primary": true
+      }
+    ],
+    "uploads": [],
+    "tier": 1,
+    "cursus": [
+      {
+        "id": 1,
+        "created_at": "2014-11-02T17:43:38.480+01:00",
+        "name": "42",
+        "slug": "42",
+        "users_count": 1918,
+        "users_url": "https://api.intrav2.42.fr/v2/cursus/42/users",
+        "projects_url": "https://api.intrav2.42.fr/v2/cursus/42/projects",
+        "topics_url": "https://api.intrav2.42.fr/v2/cursus/42/topics",
+        "tags_url": "https://api.intrav2.42.fr/v2/cursus/42/tags"
+      }
+    ],
+    "attachments": [
+      {
+        "id": 3,
+        "kind": "pdf",
+        "url": "https://cdn.intrav2.42.fr/pdf/pdf/16/get_next_line.pdf",
+        "label": "Subject",
+        "content": null
+      },
+      {
+        "id": 1315,
+        "kind": "pdf",
+        "url": "https://cdn.intrav2.42.fr/pdf/pdf/436/get_next_line.ro.pdf",
+        "label": "Subiect",
+        "content": null
+      }
+    ],
+    "skills": [
+      {
+        "id": 2,
+        "name": "Imperative programming"
+      },
+      {
+        "id": 3,
+        "name": "Rigor"
+      },
+      {
+        "id": 1,
+        "name": "Algorithms & AI"
+      }
+    ],
+    "tags": [
+      {
+        "id": 18,
+        "name": "Get_Next_Line"
+      },
+      {
+        "id": 2,
+        "name": "C"
+      }
+    ],
+    "evaluations": [
+      {
+        "id": 16,
+        "kind": "scale"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "ft_ls",
+    "slug": "ft_ls",
+    "parent": null,
+    "children": [],
+    "solo": true,
+    "begin_at": null,
+    "end_at": null,
+    "min_estimate_time": 604800,
+    "max_estimate_time": 1209600,
+    "max_people": null,
+    "url": "https://api.intrav2.42.fr/v2/projects/ft_ls",
+    "project_users_url": "https://api.intrav2.42.fr/v2/projects/ft_ls/projects_users",
+    "teams_url": "https://api.intrav2.42.fr/v2/projects/ft_ls/teams",
+    "scales": [
+      {
+        "id": 3,
+        "correction_number": 5,
+        "is_primary": false
+      },
+      {
+        "id": 111,
+        "correction_number": 5,
+        "is_primary": true
+      }
+    ],
+    "uploads": [],
+    "tier": 1,
+    "cursus": [
+      {
+        "id": 1,
+        "created_at": "2014-11-02T17:43:38.480+01:00",
+        "name": "42",
+        "slug": "42",
+        "users_count": 1918,
+        "users_url": "https://api.intrav2.42.fr/v2/cursus/42/users",
+        "projects_url": "https://api.intrav2.42.fr/v2/cursus/42/projects",
+        "topics_url": "https://api.intrav2.42.fr/v2/cursus/42/topics",
+        "tags_url": "https://api.intrav2.42.fr/v2/cursus/42/tags"
+      }
+    ],
+    "attachments": [
+      {
+        "id": 4,
+        "kind": "pdf",
+        "url": "https://cdn.intrav2.42.fr/pdf/pdf/17/ft_ls.fr.pdf",
+        "label": "Subject",
+        "content": null
+      },
+      {
+        "id": 1316,
+        "kind": "pdf",
+        "url": "https://cdn.intrav2.42.fr/pdf/pdf/437/ft_ls.ro.pdf",
+        "label": "Subiect",
+        "content": null
+      }
+    ],
+    "skills": [
+      {
+        "id": 4,
+        "name": "Unix"
+      },
+      {
+        "id": 2,
+        "name": "Imperative programming"
+      },
+      {
+        "id": 1,
+        "name": "Algorithms & AI"
+      }
+    ],
+    "tags": [
+      {
+        "id": 21,
+        "name": "ft_ls"
+      },
+      {
+        "id": 2,
+        "name": "C"
+      },
+      {
+        "id": 22,
+        "name": "Unix"
+      }
+    ],
+    "evaluations": [
+      {
+        "id": 17,
+        "kind": "scale"
+      }
+    ]
+  }]
