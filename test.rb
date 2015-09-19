@@ -51,20 +51,17 @@ def get_projects (cursus_name)
 					p_index_last = buff[(buff =~ />; rel="last"/)-1].to_i
 					tab_proj = Array.new(p_index_last)
 					tab_proj[0] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").body
-					# file = File.open("projects.json", "w")
-					# file.write(tab_proj[0])
-					# file.close
+					file = File.open("projects0.json", "w")
+					file.write(tab_proj[0])
+					file.close
 					for j in 2..p_index_last
 						# p "/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s
 						# p token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
 						tab_proj[j-1] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
-						# file = File.open("projects.json", "a")
-						# file.write(tab_proj[j-1])
-						# file.close
+						file = File.open("projects"+(j-1).to_s+".json", "w")
+						file.write(tab_proj[j-1])
+						file.close
 					end
-					file = File.open("projects.json", "a")
-					file.write(tab_proj)
-					file.close
 				end
 
 				# projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").headers
@@ -95,9 +92,13 @@ def get_p_id (project_name, token)
 		# data_hash = JSON.parse(file)
 		# p data_hash.length
 		p "token = #{token.token}"
-		file = File.open('projects.json', "r" )
-    	data_hash = JSON.load(file)
-		p data_hash.length
+		nb_files = Dir["./projects*.json"].count
+		for i in 0..(nb_files-1)
+			file = File.open("projects"+i.to_s+".json", "r" )
+			data_hash = JSON.load(file)
+			# size = data_hash.length
+			p data_hash.length
+		end
 	rescue Exception => e
 		p e.message
 		p e.backtrace.inspect
