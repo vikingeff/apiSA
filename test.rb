@@ -40,17 +40,23 @@ def get_projects (cursus_name)
 		nb_cursus = cursus.length
 		cfound = 0
 		for i in 0..(nb_cursus-1)
+			p cursus[i]['name']
 			if cursus[i]['name'] == cursus_name
 				# print ("/v2/cursus/"+cursus[i]['id'].to_s+"/projects")
 				# projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page=3").body
 				# p projects
 				projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").headers
+				p projects
 				if projects['link'] != nil
 					buff = projects['link']
-					p_index_next = buff[(buff =~ />; rel="next"/)-1].to_i
 					p_index_last = buff[(buff =~ />; rel="last"/)-1].to_i
+					p p_index_last
+					if p_index_last > 1
+						p_index_next = buff[(buff =~ />; rel="next"/)-1].to_i
+					end
 					tab_proj = Array.new(p_index_last)
 					tab_proj[0] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").body
+
 					file = File.open("projects0.json", "w")
 					file.write(tab_proj[0])
 					file.close
@@ -99,6 +105,7 @@ def get_p_id (project_name, token)
 			data_hash = JSON.load(file)
 			# size = data_hash.length
 			nb_pj = data_hash.length
+			p nb_pj
 			for j in 0..(nb_pj-1)
 				# p data_hash[j]['name']
 				# p project_name
