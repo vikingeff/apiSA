@@ -51,17 +51,20 @@ def get_projects (cursus_name)
 					p_index_last = buff[(buff =~ />; rel="last"/)-1].to_i
 					tab_proj = Array.new(p_index_last)
 					tab_proj[0] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").body
-					file = File.open("projects.json", "w")
-					file.write(tab_proj[0])
-					file.close
+					# file = File.open("projects.json", "w")
+					# file.write(tab_proj[0])
+					# file.close
 					for j in 2..p_index_last
 						# p "/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s
 						# p token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
 						tab_proj[j-1] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
-						file = File.open("projects.json", "a")
-						file.write(tab_proj[j-1])
-						file.close
+						# file = File.open("projects.json", "a")
+						# file.write(tab_proj[j-1])
+						# file.close
 					end
+					file = File.open("projects.json", "a")
+					file.write(tab_proj)
+					file.close
 				end
 
 				# projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").headers
