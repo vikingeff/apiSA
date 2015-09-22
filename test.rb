@@ -38,49 +38,62 @@ def get_projects (cursus_name)
 		# Get the different cursus and save the projects from cursus 42 for later use
 		cursus = token.get("/v2/cursus").parsed
 		nb_cursus = cursus.length
-		cfound = 0
+		cfound = -1
+		# p cursus_name
 		for i in 0..(nb_cursus-1)
-			p cursus[i]['name']
-			if cursus[i]['name'] == cursus_name
-				# print ("/v2/cursus/"+cursus[i]['id'].to_s+"/projects")
-				# projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page=3").body
-				# p projects
-				projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").headers
-				p projects
-				if projects['link'] != nil
-					buff = projects['link']
-					p_index_last = buff[(buff =~ />; rel="last"/)-1].to_i
-					p p_index_last
-					if p_index_last > 1
-						p_index_next = buff[(buff =~ />; rel="next"/)-1].to_i
-					end
-					tab_proj = Array.new(p_index_last)
-					tab_proj[0] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").body
-
-					file = File.open("projects0.json", "w")
-					file.write(tab_proj[0])
-					file.close
-					for j in 2..p_index_last
-						# p "/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s
-						# p token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
-						tab_proj[j-1] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
-						file = File.open("projects"+(j-1).to_s+".json", "w")
-						file.write(tab_proj[j-1])
-						file.close
-					end
+			if cursus_name == "cursus"
+				if i == 0
+					print ("Here is a list of all available cursuses on the intranet.\n")
 				end
+				p cursus[i]['name']
+				cfound = 2
+			else
+				if cursus[i]['name'] == cursus_name
+					# print ("/v2/cursus/"+cursus[i]['id'].to_s+"/projects")
+					# projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page=3").body
+					# p projects
+					projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").headers
+					p projects
+					if projects['link'] != nil
+						buff = projects['link']
+						p_index_last = buff[(buff =~ />; rel="last"/)-1].to_i
+						p p_index_last
+						if p_index_last > 1
+							p_index_next = buff[(buff =~ />; rel="next"/)-1].to_i
+						end
+						tab_proj = Array.new(p_index_last)
+						tab_proj[0] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").body
 
-				# projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").headers
-				# projects = open ("https://api.intrav2.42.fr/v2/cursus/"+cursus[i]['id'].to_s+"/projects/\?access_token\="+"#{token.token}")
-				# projects = Curl.get("https://api.intrav2.42.fr/v2/cursus/"+cursus[i]['id'].to_s+"/projects/\?access_token\="+"#{token.token}")
-				# print (projects)
-				# file = File.open("projects.json", "w")
-				# file.write(projects)
-				# file.close
-		  		cfound = 1
+						file = File.open("projects0.json", "w")
+						file.write(tab_proj[0])
+						file.close
+						for j in 2..p_index_last
+							# p "/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s
+							# p token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
+							tab_proj[j-1] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
+							file = File.open("projects"+(j-1).to_s+".json", "w")
+							file.write(tab_proj[j-1])
+							file.close
+						end
+					end
+
+					# projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").headers
+					# projects = open ("https://api.intrav2.42.fr/v2/cursus/"+cursus[i]['id'].to_s+"/projects/\?access_token\="+"#{token.token}")
+					# projects = Curl.get("https://api.intrav2.42.fr/v2/cursus/"+cursus[i]['id'].to_s+"/projects/\?access_token\="+"#{token.token}")
+					# print (projects)
+					# file = File.open("projects.json", "w")
+					# file.write(projects)
+					# file.close
+			  		cfound = 1
+			  	end
 			end
 		end
-		if cfound == 0
+		case cfound
+		when 2
+			
+		when 1
+			print ("Files were created withe the list of all projects of cursus "+cursus_name+"\n")
+		else
 			print ("Cursus not found, so let's go look for a projet.\n")
 			# get_p_infos(cursus_name, token)
 			get_p_id(cursus_name, token)
@@ -136,7 +149,7 @@ def get_p_infos (project_id, token)
 		# project = token.get("/v2/projects/"+project_name).parsed
 		# project = token.get("/v2/cursus/1/"+project_name).parsed
 		project = token.get("/v2/projects/"+project_id.to_s).parsed
-		p project
+		# p project
 		if status == 404
 			print ("No looking good no project found either.")
 		else
