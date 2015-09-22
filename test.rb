@@ -53,20 +53,21 @@ def get_projects (cursus_name)
 					# projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page=3").body
 					# p projects
 					projects = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").headers
-					p projects
+					# p projects
 					if projects['link'] != nil
 						buff = projects['link']
 						p_index_last = buff[(buff =~ />; rel="last"/)-1].to_i
-						p p_index_last
+						# p p_index_last
 						if p_index_last > 1
 							p_index_next = buff[(buff =~ />; rel="next"/)-1].to_i
 						end
 						tab_proj = Array.new(p_index_last)
 						tab_proj[0] = token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects").body
-
-						file = File.open("projects0.json", "w")
-						file.write(tab_proj[0])
-						file.close
+						if tab_proj[0].length > 2
+							file = File.open("projects0.json", "w")
+							file.write(tab_proj[0])
+							file.close
+						end
 						for j in 2..p_index_last
 							# p "/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s
 							# p token.get("/v2/cursus/"+cursus[i]['id'].to_s+"/projects?page="+j.to_s).body
@@ -92,7 +93,11 @@ def get_projects (cursus_name)
 		when 2
 			
 		when 1
-			print ("Files were created withe the list of all projects of cursus "+cursus_name+"\n")
+			if tab_proj[0].length > 2
+				print (p_index_last.to_s+" files were created with the list of all projects of cursus named : "+cursus_name+"\n")
+			else
+				print ("Seems the cursus named \""+cursus_name+"\" doesn't have any projects so far.\n")
+			end
 		else
 			print ("Cursus not found, so let's go look for a projet.\n")
 			# get_p_infos(cursus_name, token)
@@ -132,7 +137,7 @@ def get_p_id (project_name, token)
 		if pid != 0
 			get_p_infos(pid, token)
 		else
-			print ("No looking good no project found either.")
+			print ("No looking good no project found either, please try the command with \"cursus\" as project name to get a list of all available cursuses.\n")
 		end
 	rescue Exception => e
 		p e.message
