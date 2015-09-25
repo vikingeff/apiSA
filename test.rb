@@ -95,13 +95,14 @@ def get_projects (cursus_name)
 		when 1
 			if tab_proj[0].length > 2
 				print (p_index_last.to_s+" files were created with the list of all projects of cursus named : "+cursus_name+"\n")
+				return 0
 			else
 				print ("Seems the cursus named \""+cursus_name+"\" doesn't have any projects so far.\n")
 			end
 		else
 			print ("Cursus not found, so let's go look for a projet.\n")
 			# get_p_infos(cursus_name, token)
-			get_p_id(cursus_name, token)
+			return get_p_id(cursus_name, token)
 		end
 	rescue Exception => e  
 		p e.message  
@@ -115,29 +116,36 @@ def get_p_id (project_name, token)
 		# file = File.read('projects.json')
 		# data_hash = JSON.parse(file)
 		# p data_hash.length
-		p "token = #{token.token}"
+		print ("The active token is : #{token.token}\n")
 		pid = 0
+		nb_pj = 0
 		nb_files = Dir["./projects*.json"].count
-		for i in 0..(nb_files-1)
-			file = File.open("projects"+i.to_s+".json", "r" )
-			data_hash = JSON.load(file)
-			# size = data_hash.length
-			nb_pj = data_hash.length
-			p nb_pj
-			for j in 0..(nb_pj-1)
-				# p data_hash[j]['name']
-				# p project_name
-				if data_hash[j]['name'] == project_name
-					# p j
-					# p data_hash[j]
-					pid = data_hash[j]['id']
+		if nb_files == 0
+			print ("Before looking for a project you have to enter a cursus name.\nTry the command with \"cursus\" as project name to get a list of all available cursuses.\n")
+		else
+			savup = File.open("projects_list.txt", "w")
+			for i in 0..(nb_files-1)
+				file = File.open("projects"+i.to_s+".json", "r" )
+				data_hash = JSON.load(file)
+				# size = data_hash.length
+				nb_pj = data_hash.length
+				for j in 0..(nb_pj-1)
+					savup.write (data_hash[j]['name']+"\n")
+					# p project_name
+					if data_hash[j]['name'] == project_name
+						# p j
+						# p data_hash[j]
+						pid = data_hash[j]['id']
+					end
 				end
 			end
-		end
-		if pid != 0
-			get_p_infos(pid, token)
-		else
-			print ("No looking good no project found either, please try the command with \"cursus\" as project name to get a list of all available cursuses.\n")
+			savup.close
+			print ("Cursus found including "+nb_pj.to_s+" projects.\n") 
+			if pid != 0
+				return get_p_infos(pid, token)
+			else
+				print ("No projects seems to be name like that, find a list of all available projects in file named \"projects_list.txt\".\n")
+			end
 		end
 	rescue Exception => e
 		p e.message
@@ -147,10 +155,14 @@ end
 
 def get_p_infos (project_id, token)
 	begin
-		p "token = #{token.token}"
+		print ("The active token is : #{token.token}\n")
 		# p "/v2/projects/"+project_name
 		status = token.get("/v2/projects/"+project_id.to_s).status
-		p status
+		if status == 200
+			print ("Connection successful\n")
+		else
+			print ("Connection error : "+status.to_s)
+		end
 		# project = token.get("/v2/projects/"+project_name).parsed
 		# project = token.get("/v2/cursus/1/"+project_name).parsed
 		project = token.get("/v2/projects/"+project_id.to_s).parsed
@@ -158,7 +170,8 @@ def get_p_infos (project_id, token)
 		if status == 404
 			print ("No looking good no project found either.")
 		else
-			print (project)
+			# print (project)
+			return project
 		end
 	rescue Exception => e
 		p e.message
@@ -169,7 +182,15 @@ end
 
 if ARGV.length != 1
 	print ("Usage: test.rb [cursus_name/project_name]\n")
+
 else
-	get_projects(ARGV[0])
+	proj = get_projects(ARGV[0])
+	if proj == 0
+		file = File.open("projects_list.txt", "r" )
+		p file.length
+	else
+		p proj['min_estimate_time']/86400
+		p proj['max_estimate_time']/86400
+	end
 end
 #cursus_name = gets
