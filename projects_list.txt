@@ -1,62 +1,186 @@
 Libft
+min: 7
+max: 14
 Get_Next_Line
+min: 7
+max: 14
 ft_ls
+min: 7
+max: 14
 FdF
+min: 7
+max: 14
 ft_printf
+min: 7
+max: 14
 ft_sh1
+min: 14
+max: 21
 Wolf3d
+min: 21
+max: 28
 C Exam - Beginner
+min: 7
+max: 14
 Fract'ol
+min: 7
+max: 14
 Corewar
+min: 35
+max: 42
 RTv1
+min: 21
+max: 28
 RT
+min: 42
+max: 56
 Push_swap
+min: 7
+max: 14
 Lem_in
+min: 21
+max: 28
 ft_sh2
+min: 14
+max: 21
 ft_select
+min: 14
+max: 21
 ft_sh3
+min: 14
+max: 21
 42sh
+min: 42
+max: 56
 Malloc
+min: 7
+max: 14
 Nm-otool
+min: 14
+max: 21
 ft_script
+min: 7
+max: 14
 Philosophers
+min: 7
+max: 14
 ft_p
+min: 14
+max: 21
 IRC
+min: 14
+max: 21
 Lem-ipc
+min: 21
+max: 28
 Zappy
+min: 49
+max: 56
 Framework 0
+min: 7
+max: 14
 Framework 1
+min: 7
+max: 14
 Framework 2
+min: 7
+max: 14
 Big Web Project
+min: 42
+max: 56
 Piscine PHP
+min: 7
+max: 14
 Rushes
+min: N/A
+max: N/A
 Piscine CPP
+min: 7
+max: 14
 mod1
+min: 7
+max: 14
 LibftASM
+min: 7
+max: 14
 Abstract VM
+min: 14
+max: 21
 Open Project
+min: 180
+max: 180
 Root-me | App-Systeme
+min: 28
+max: 56
 Nibbler
+min: 14
+max: 21
 Savoir Relier
+min: 7
+max: 14
 N-puzzle
+min: 14
+max: 21
 Expert System
+min: 14
+max: 21
 Gomoku
+min: 14
+max: 28
 ComputorV1
+min: 7
+max: 14
 Docker
+min: 7
+max: 14
 Partnerships
+min: N/A
+max: N/A
 First Internship
+min: 120
+max: 180
 Taskmaster
+min: 14
+max: 21
 Scop
+min: 7
+max: 14
 Projet partenariat Synchrone Technologies
+min: 7
+max: 14
 42run
+min: 7
+max: 14
 strace
+min: 7
+max: 14
 Part-time
+min: 7
+max: 180
 Final Internship
+min: 180
+max: 180
 Communication Trainer
+min: 7
+max: 14
 Piscine OCaml
+min: 14
+max: 14
 Piscine Unity
+min: 7
+max: 14
 Corewar Championship
+min: 7
+max: 90
 ft_hangouts
+min: 14
+max: 21
 Bomberman
+min: 28
+max: 56
 Root-me | Cracking
+min: 28
+max: 56
 ft_linear_regression
+min: 7
+max: 14

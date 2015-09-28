@@ -118,14 +118,14 @@ def get_p_id (project_name, token)
 		if nb_files == 0
 			print ("Before looking for a project you have to enter a cursus name.\nTry the command with \"cursus\" as project name to get a list of all available cursuses.\n")
 		else
-			savup = File.open("projects_list.txt", "w")
+			# savup = File.open("projects_list.txt", "w")
 			for i in 0..(nb_files-1)
 				file = File.open("projects"+i.to_s+".json", "r" )
 				data_hash = JSON.load(file)
 				# size = data_hash.length
 				nb_pj = data_hash.length
 				for j in 0..(nb_pj-1)
-					savup.write (data_hash[j]['name']+"\n")
+					# savup.write (data_hash[j]['name']+"\n")
 					# p project_name
 					if data_hash[j]['name'] == project_name
 						# p j
@@ -134,7 +134,7 @@ def get_p_id (project_name, token)
 					end
 				end
 			end
-			savup.close
+			# savup.close
 			print ("Cursus found including "+nb_pj.to_s+" projects.\n") 
 			if pid != 0
 				return get_p_infos(pid, token)
@@ -152,6 +152,7 @@ def get_p_infos (project_id, token)
 	begin
 		print ("The active token is : #{token.token}\n")
 		# p "/v2/projects/"+project_name
+		# p project_id
 		status = token.get("/v2/projects/"+project_id.to_s).status
 		if status == 200
 			print ("Connection successful\n")
@@ -195,9 +196,34 @@ else
 		# buffer = get_p_infos(line[0..line.length-2], token)
 		# p "min: " + (proj['min_estimate_time']/86400).to_s + "\n"
 		# p "max: " + (proj['max_estimate_time']/86400).to_s + "\n"
-		end
+		# end
 		# p file
+		nb_files = Dir["./projects*.json"].count
+		savup = File.open("projects_list.txt", "w")
+		for i in 0..(nb_files-1)
+			file = File.open("projects"+i.to_s+".json", "r" )
+			data_hash = JSON.load(file)
+			nb_pj = data_hash.length
+			for j in 0..(nb_pj-1)
+				# p data_hash[j]['name']
+				id = get_p_id(data_hash[j]['name'], token)['id']
+				buffer = get_p_infos(id, token)
+				savup.write(buffer['name']+"\n")
+				if buffer['min_estimate_time'] != nil
+					savup.write ("min: " + (buffer['min_estimate_time']/86400).to_s + "\n")
+				else
+					savup.write ("min: N/A\n")
+				end
+				if buffer['max_estimate_time'] != nil
+					savup.write ("max: " + (buffer['max_estimate_time']/86400).to_s + "\n")
+				else
+					savup.write ("max: N/A\n")
+				end
+			end
+		end
+		savup.close
 	else
+		# print proj
 		p proj['min_estimate_time']/86400
 		p proj['max_estimate_time']/86400
 	end
