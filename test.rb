@@ -25,13 +25,8 @@ require "curb"
 UID = "b5ed15659469cdbce9b3f4d8badd61d8d15ce805071dbc43ab00e5f90c5e9fed"
 SECRET = "9d47c82282c76d8eb030ec1b7b80e783dbcf2e59e186671cbb47217c9fa052b1"
 
-def get_projects (cursus_name)
+def get_projects (cursus_name, token)
 	begin
-		# Create the client with your credentials
-		client = OAuth2::Client.new(UID, SECRET, site: "https://api.intrav2.42.fr", raise_errors: false)
-
-		# Get an access token and print it
-		token = client.client_credentials.get_token
 		print (token)
 		print ("\n")
 
@@ -168,7 +163,7 @@ def get_p_infos (project_id, token)
 		project = token.get("/v2/projects/"+project_id.to_s).parsed
 		# p project
 		if status == 404
-			print ("No looking good no project found either.")
+			print ("No looking good no project found either.\n")
 		else
 			# print (project)
 			return project
@@ -184,10 +179,24 @@ if ARGV.length != 1
 	print ("Usage: test.rb [cursus_name/project_name]\n")
 
 else
-	proj = get_projects(ARGV[0])
+	# Create the client with your credentials
+	client = OAuth2::Client.new(UID, SECRET, site: "https://api.intrav2.42.fr", raise_errors: false)
+
+	# Get an access token and print it
+	token = client.client_credentials.get_token
+
+	proj = get_projects(ARGV[0], token)
 	if proj == 0
-		file = File.open("projects_list.txt", "r" )
-		p file.length
+		# file = File.open("projects_list.txt", "r" )
+		# File.foreach("projects_list.txt").with_index do |line, line_num|
+		# puts "#{line_num}: #{line}"
+		# p line
+		# p line[0..line.length-2]
+		# buffer = get_p_infos(line[0..line.length-2], token)
+		# p "min: " + (proj['min_estimate_time']/86400).to_s + "\n"
+		# p "max: " + (proj['max_estimate_time']/86400).to_s + "\n"
+		end
+		# p file
 	else
 		p proj['min_estimate_time']/86400
 		p proj['max_estimate_time']/86400
